@@ -197,10 +197,12 @@ class HoyolabClient(ApiClient):
             if os.environ.get("DISCORD_WEBHOOK"):
                     webhook = DiscordWebhook(url=os.environ.get("DISCORD_WEBHOOK"))
                     webhook.set_username("HSR Automation LAB")
-                    webhook.content = f"🚀 Automation successful!\n"
-                                      f"🎮 Game: {data['game_name']}\n"
-                                      f"👤 Player: {account.get_nickname()}\n"
-                                      f"🆔 UID: {account.get_game_uid()}"
+                    webhook.content = (
+                    f"🚀 Automation successful!\n"
+                    f"🎮 Game: {data['game_name']}\n"
+                    f"👤 Player: {account.get_nickname()}\n"
+                    f"🆔 UID: {account.get_game_uid()}"
+                    )
                     webhook.execute()
 
 def send_discord_notification(webhook_url, account, reward):

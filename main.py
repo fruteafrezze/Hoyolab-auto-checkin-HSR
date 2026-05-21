@@ -191,19 +191,19 @@ class HoyolabClient(ApiClient):
             except requests.exceptions.RequestException as e:
                 logging.error(f"Check-in request failed for {account.get_nickname()}: {e}")
                 return
-        else:
-            logging.info(f"You've already checked in today, {data['main']}~")
+       else:
+           logging.info("DEBUG: Entered already-checked-in block")
 
-            if os.environ.get("DISCORD_WEBHOOK"):
-                    webhook = DiscordWebhook(url=os.environ.get("DISCORD_WEBHOOK"))
-                    webhook.set_username("HSR Automation LAB")
-                    webhook.content = (
-                    f"🚀 Automation successful!\n"
-                    f"🎮 Game: {data['game_name']}\n"
-                    f"👤 Player: {account.get_nickname()}\n"
-                    f"🆔 UID: {account.get_game_uid()}"
-                    )
-                    webhook.execute()
+           if os.environ.get("DISCORD_WEBHOOK"):
+               logging.info("DEBUG: Webhook exists")
+
+               webhook = DiscordWebhook(url=os.environ.get("DISCORD_WEBHOOK"))
+
+               webhook.content = "🚀 TEST MESSAGE FROM GITHUB ACTIONS"
+
+               response = webhook.execute()
+
+               logging.info(f"DEBUG: Discord response = {response.status_code}")
 
 def send_discord_notification(webhook_url, account, reward):
     if not webhook_url:

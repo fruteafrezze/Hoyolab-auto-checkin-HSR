@@ -191,7 +191,7 @@ class HoyolabClient(ApiClient):
             except requests.exceptions.RequestException as e:
                 logging.error(f"Check-in request failed for {account.get_nickname()}: {e}")
                 return
-       else:
+        else:
            logging.info(f"You've already checked in today, {data['main']}~")
 
            if os.environ.get("DISCORD_WEBHOOK"):

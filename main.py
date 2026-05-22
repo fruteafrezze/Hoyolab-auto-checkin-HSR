@@ -146,14 +146,19 @@ class HoyolabClient(ApiClient):
             raise Exception("Invalid cookie")
 
     def get_game_accounts(self):
-        logging.info("Scanning for Hoyoverse game account")
-        url = "https://api-os-takumi.hoyolab.com/binding/api/getUserGameRolesByCookie"
-        res = self._request(url)
-        if not self._check_json_format(res, url, ["data", ["list"]]):
-            return []
+            logging.info("Scanning for Hoyoverse game account")
+            url = "https://api-os-takumi.hoyolab.com/binding/api/getUserGameRolesByCookie"
+            res = self._request(url)
+            if not self._check_json_format(res, url, ["data", ["list"]]):
+                return []
 
-        accounts = [GameAccount(**account) for account in res["data"]["list"]]
-        return accounts
+            # This safely filters using dictionary syntax [] before building the GameAccount objects
+            accounts = [
+                GameAccount(**account)
+                for account in res["data"]["list"]
+                if account["game_biz"] == "hkrpg_global"
+            ]
+            return accounts
 
     def check_in(self, account):
         if account.get_game_biz() not in GAME_DATA:

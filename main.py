@@ -219,8 +219,8 @@ def send_discord_notification(webhook_url, account, reward):
     webhook = DiscordWebhook(url=webhook_url)
     embed = DiscordEmbed(title=f"{reward.get_game_name()} Daily Check In", color="03b2f8")
     embed.set_author(
-        name="Doctor Who Need",
-        icon_url="https://media.discordapp.net/attachments/998960103766118503/1275905124102836306/idk-if-this-detail-about-dr-ratios-pose-is-true-but-here-v0-ynulkoybl7cc1.png?ex=66c796be&is=66c6453e&hm=cfff14c15e52d63a4dd089ec20fbc6f314d89f96842665e9bae78484c7ebd8e9&"
+        name="Astral Express Crew",
+        icon_url="https://raw.githubusercontent.com/fruteafrezze/Hoyolab-auto-checkin-HSR/main/asset/evachibi.jpg"
     )
     embed.set_thumbnail(url=reward.get_icon())
     embed.add_embed_field(name="UID", value=account.get_game_uid())
